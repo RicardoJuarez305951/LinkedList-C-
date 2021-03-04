@@ -1,0 +1,9 @@
+G:\Programacion\IntelliJ IDEA Community Edition 2020.3.2\Programas\LinkedList\LinkedList\bin\Debug\netstandard2.0\LinkedList.deps.json
+G:\Programacion\IntelliJ IDEA Community Edition 2020.3.2\Programas\LinkedList\LinkedList\bin\Debug\netstandard2.0\LinkedList.dll
+G:\Programacion\IntelliJ IDEA Community Edition 2020.3.2\Programas\LinkedList\LinkedList\bin\Debug\netstandard2.0\LinkedList.pdb
+G:\Programacion\IntelliJ IDEA Community Edition 2020.3.2\Programas\LinkedList\LinkedList\obj\Debug\netstandard2.0\LinkedList.csprojAssemblyReference.cache
+G:\Programacion\IntelliJ IDEA Community Edition 2020.3.2\Programas\LinkedList\LinkedList\obj\Debug\netstandard2.0\LinkedList.AssemblyInfoInputs.cache
+G:\Programacion\IntelliJ IDEA Community Edition 2020.3.2\Programas\LinkedList\LinkedList\obj\Debug\netstandard2.0\LinkedList.AssemblyInfo.cs
+G:\Programacion\IntelliJ IDEA Community Edition 2020.3.2\Programas\LinkedList\LinkedList\obj\Debug\netstandard2.0\LinkedList.csproj.CoreCompileInputs.cache
+G:\Programacion\IntelliJ IDEA Community Edition 2020.3.2\Programas\LinkedList\LinkedList\obj\Debug\netstandard2.0\LinkedList.dll
+G:\Programacion\IntelliJ IDEA Community Edition 2020.3.2\Programas\LinkedList\LinkedList\obj\Debug\netstandard2.0\LinkedList.pdb

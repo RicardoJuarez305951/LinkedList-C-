@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "iEsFWdQDx9+9ngd5InDLYfyczCxD+FVc+PcAZ7/yVDD7sBT74Z8fPNfEnW2uadx23M3JFxqkLImcH/tfaV5L4A==",
+  "success": true,
+  "projectFilePath": "G:\\Programacion\\IntelliJ IDEA Community Edition 2020.3.2\\Programas\\LinkedList\\LinkedList\\LinkedList.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\ricar\\.nuget\\packages\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
+    "C:\\Users\\ricar\\.nuget\\packages\\netstandard.library\\2.0.3\\netstandard.library.2.0.3.nupkg.sha512"
+  ],
+  "logs": []
+}
