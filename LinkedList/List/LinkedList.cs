@@ -1,166 +1,263 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 
 
-public class LinkedList
+
+namespace LinkedList.List
 {
+    public enum Position
+    {
+        BEFORE,
+        AFTER
+    }
+    public class LinkedList<G> : List<G> {
 
-    public static int BEFORE = 0;
-    public static int AFTER = 1;
+    public class Node<T>
+    {
+            public T data;
+            public Node<T> previous;
+        public Node<T> next;
 
-    private Node head;
-    private Node tail;
+        public Node(T newData)
+        {
+            data = newData;
+        }
+    }
+
+    private static Node<G> head;
+    private static Node<G> tail;
     private int size;
+
+    private static int listsCount = 0;
+
+    public LinkedList()
+    {
+        listsCount++;
+    }
+
+    public static int getListsCount()
+    {
+        return listsCount;
+    }
+
+    public class ForwardIterator : Iterator<G> {
+        private Node<G> currentNode;
+
+    public ForwardIterator()
+    {
+        this.currentNode = head;
+    }
+
+    public ForwardIterator(ForwardIterator iterator)
+    {
+        currentNode = iterator.currentNode;
+    }
+
+    public bool hasNext()
+    {
+        return currentNode != null;
+    }
+
+    public G next()
+    {
+        G data = currentNode.data;
+
+        currentNode = currentNode.next;
+
+        return data;
+    }
+
+    public Node<G> getCurrentNode()
+    {  // modificador de acceso se llama -> package-private
+        return currentNode;
+    }
+}
+
+public class ReverseIterator : Iterator<G> {
+
+        private Node<G> currentNode;
+
+public ReverseIterator()
+{
+    this.currentNode = tail;
+}
+
+
+public bool hasNext()
+{
+    return currentNode != null;
+}
+
+public G next()
+{
+    G data = currentNode.data;
+
+    currentNode = currentNode.previous;
+
+    return data;
+}
+    }
+
     /**
      * Inserts data at the end of the list
      *
      * @param data Data to be inserted
      */
+    
+    public void add(G data)
+{
+    Node<G> node = new Node<G>(data);
 
+    node.previous = tail;
 
-
-    public void add(int data)
+    if (tail != null)
     {
-        Node node = new Node(data);
-
-        node.setPrevious(tail);
-
-        if (tail != null)
-        {
-            tail.setNext(node);
-        }
-
-        if (head == null)
-        {
-            head = node;
-        }
-
-        tail = node;
-        size++;
+        tail.next = node;
     }
 
-    /**
-     * @param index 0-index
-     * @return data in index
-     */
-    public int get(int index)
+    if (head == null)
     {
-        Node currentNode = head;
-        int currentIndex = 0;
-
-        while (currentIndex < index)
-        {
-            currentNode = currentNode.getNext();
-            currentIndex++;
-        }
-
-        return currentNode.getData();
+        head = node;
     }
+
+    tail = node;
+    size++;
+}
+
+/**
+ * @param index 0-index
+ * @return data in index
+ */
+
+    public G get(int index)
+{
+    Node<G> currentNode = head;
+    int currentIndex = 0;
+
+    while (currentIndex < index)
+    {
+        currentNode = currentNode.next;
+        currentIndex++;
+    }
+
+    return currentNode.data;
+}
+
 
     public void delete(int index)
+{
+    Node<G> currentNode = head;
+    int currentIndex = 0;
+
+    if (index < 0 || index >= size)
     {
-        Node currentNode = head;
-        int currentIndex = 0;
-
-        if (index < 0 || index >= size)
-        {
-            return;
-        }
-
-        size--;
-
-        if (size == 0)
-        {
-            head = null;
-            tail = null;
-            return;
-        }
-
-        if (index == 0)
-        {
-            head = head.getNext();
-            head.setPrevious(null);
-        }
-
-        if (index == size)
-        {
-            tail = tail.getPrevious();
-            tail.setNext(null);
-        }
-
-        if (index > 0 && index < size)
-        {
-            while (currentIndex < index)
-            {
-                currentNode = currentNode.getNext();
-                currentIndex++;
-            }
-            currentNode.getPrevious().setNext(currentNode.getNext());
-            currentNode.getNext().setPrevious(currentNode.getPrevious());
-        }
-
-
+        return;
     }
 
-    public Iterator getIterator()
+    size--;
+
+    if (size == 0)
     {
-        return new Iterator(head);
+        head = null;
+        tail = null;
+        return;
     }
 
-    public ReverseIterator getReverseIterator()
+    if (index == 0)
     {
-        return new ReverseIterator(tail);
-
+        head = head.next;
+        head.previous = null;
     }
 
-    public void insert(int data, int position, Iterator it)
+    if (index == size)
     {
-        // ¿qué ofrece java para restringir los valores de position a solamente BEFORE y AFTER
-
-
-            Node newNode = new Node(data);
-            Node currentNode = it.getCurrentNode();
-
-            if (position == AFTER)
-            {
-                newNode.setNext(currentNode.getNext());
-                newNode.setPrevious(currentNode);
-                currentNode.setNext(newNode);
-                if (newNode.getNext() != null)
-                {
-                    newNode.getNext().setPrevious(newNode);
-                }
-                else
-                {
-                    tail = newNode;
-                }
-            }
-            else if (position == BEFORE)
-            {
-                newNode.setPrevious(currentNode.getPrevious());
-                newNode.setNext(currentNode);
-                currentNode.setPrevious(newNode);
-                if (newNode.getPrevious() != null)
-                {
-                    newNode.getPrevious().setNext(newNode);
-                }
-                else
-                {
-                    head = newNode;
-                }
-            }
-            else
-            {
-                System.Console.WriteLine("No conozco el valor de position");
-            }
-        size++;
+        tail = tail.previous;
+        tail.next = null;
     }
+
+    if (index > 0 && index < size)
+    {
+        while (currentIndex < index)
+        {
+            currentNode = currentNode.next;
+            currentIndex++;
+        }
+        currentNode.previous.next = currentNode.next;
+        currentNode.next.previous = currentNode.previous;
+    }
+
+
+}
+
+
+    public Iterator<G> getIterator()
+{
+    return new ForwardIterator();
+}
+
+
+    public void insert(G data, Position position, Iterator<G> it)
+{
+
+
+    Node<G> newNode = new Node<G>(data);
+    Node<G> currentNode = ((ForwardIterator)it).getCurrentNode();
+
+    if (position == Position.AFTER)
+    {
+        newNode.next = currentNode.next;
+        newNode.previous = currentNode;
+        currentNode.next = newNode;
+        if (newNode.next != null)
+        {
+            newNode.next.previous = newNode;
+        }
+        else
+        {
+            tail = newNode;
+        }
+    }
+    else if (position == Position.AFTER)
+    {
+        newNode.previous = currentNode.previous;
+        newNode.next = currentNode;
+        currentNode.previous = newNode;
+        if (newNode.previous != null)
+        {
+            newNode.previous.next = newNode;
+        }
+        else
+        {
+            head = newNode;
+        }
+    }
+    else
+    {
+        System.Console.WriteLine("No conozco el valor de position");
+    }
+    size++;
+}
+
 
     public int getSize()
-    {
-        return size;
-    }
+{
+    return size;
+}
 
+
+    public ReverseIterator getReverseIterator()
+{
+    return new ReverseIterator();
+}
+
+        Iterator<G> List<G>.getReverseIterator()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public bool hasNext()
+        {
+            throw new System.NotImplementedException();
+        }
+    }
     
 }

@@ -2,36 +2,14 @@
 using System.Collections.Generic;
 using System.Text;
 
-public class Iterator
+namespace LinkedList.List
 {
-    private Node currentNode;
-
-    public Iterator(Node currentNode)
+    public interface Iterator<T>
     {
-        this.currentNode = currentNode;
-    }
 
-    public Iterator(Iterator iterator)
-    {
-        currentNode = iterator.currentNode;
-    }
+        bool hasNext();
 
-    public bool hasNext()
-    {
-        return currentNode != null;
-    }
+        T next();
 
-    public int next()
-    {
-        int data = currentNode.getData();
-
-        currentNode = currentNode.getNext();
-
-        return data;
-    }
-
-    public Node getCurrentNode()
-    {  // modificador de acceso se llama -> package-private
-        return currentNode;
     }
 }
